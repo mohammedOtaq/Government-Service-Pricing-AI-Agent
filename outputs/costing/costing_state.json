@@ -1,0 +1,45 @@
+{
+  "agent_name": "Costing Agent",
+  "stage": "costing",
+  "status": "completed",
+  "service_id": "SRV-001",
+  "inputs_used": {
+    "direct_cost": 2800000,
+    "indirect_cost": 1400000,
+    "annual_transactions": 12000,
+    "current_fee": 500,
+    "proposed_fee": 450,
+    "third_party_fee": 20,
+    "other_mandatory_charges": 10
+  },
+  "analysis": {
+    "direct_cost": 2800000.0,
+    "indirect_cost": 1400000.0,
+    "annual_transactions": 12000.0,
+    "current_fee": 500.0,
+    "proposed_fee": 450.0,
+    "third_party_fee": 20.0,
+    "other_mandatory_charges": 10.0,
+    "total_cost": 4200000.0,
+    "unit_cost": 350.0,
+    "current_annual_revenue": 6000000.0,
+    "proposed_annual_revenue": 5400000.0,
+    "revenue_difference": -600000.0,
+    "cost_recovery_ratio": 1.2857142857142858,
+    "customer_fee_change": -50.0,
+    "customer_fee_change_percentage": -0.1,
+    "total_customer_cost": 480.0
+  },
+  "findings": [
+    "Total cost is 4,200,000.00.",
+    "Unit cost is 350.00.",
+    "Cost recovery ratio is 1.2857.",
+    "Proposed annual revenue change is -600,000.00."
+  ],
+  "missing_data": [],
+  "service_owner_questions": [],
+  "recommendation": "Cost recovery is achieved under the proposed fee.",
+  "next_stage": "benchmark",
+  "can_continue": true,
+  "blocks_final_approval": false
+}

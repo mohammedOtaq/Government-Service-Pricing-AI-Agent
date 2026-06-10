@@ -1,0 +1,36 @@
+{
+  "agent_name": "Policy Compliance Agent",
+  "stage": "policy",
+  "status": "approved_for_next_stage",
+  "service_id": "SRV-001",
+  "inputs_used": {
+    "service_is_value_added": true,
+    "clear_beneficiary": true,
+    "legal_authority_available": true,
+    "fee_collectable": true,
+    "duplication_risk": "medium",
+    "renewal_justified": true,
+    "customer_journey_reviewed": true,
+    "benchmark_available": true,
+    "subsidy_reason": null
+  },
+  "analysis": {
+    "critical_blockers": [],
+    "duplication_risk": "medium",
+    "policy_ready": true
+  },
+  "findings": [
+    "Service is identified as value-added.",
+    "A clear beneficiary is identified.",
+    "Legal or policy authority is available.",
+    "Duplication risk is recorded as medium."
+  ],
+  "missing_data": [],
+  "service_owner_questions": [
+    "Review duplication risk and confirm mitigation before approval."
+  ],
+  "recommendation": "Policy assessment supports continuation.",
+  "next_stage": "costing",
+  "can_continue": true,
+  "blocks_final_approval": false
+}

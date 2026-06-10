@@ -1,0 +1,36 @@
+{
+  "agent_name": "Service Intake Agent",
+  "stage": "service_profile",
+  "status": "completed",
+  "service_id": "SRV-001",
+  "inputs_used": {
+    "service_id": "SRV-001",
+    "service_name": "Renewal of Professional Activity Permit",
+    "service_type": "Administrative / Regulatory Service",
+    "service_owner": "Sample Government Entity",
+    "customer_segment": "Companies / SMEs",
+    "is_mandatory": true,
+    "is_recurring": true,
+    "renewal_period_months": 12,
+    "service_description": "A recurring administrative service that allows companies to renew a professional activity permit.",
+    "channel": "Digital",
+    "automation_level_percentage": 60,
+    "average_processing_time_minutes": 20
+  },
+  "analysis": {
+    "core_fields_complete": true,
+    "is_recurring": true,
+    "renewal_period_months": 12
+  },
+  "findings": [
+    "Service identified as Renewal of Professional Activity Permit.",
+    "Automation level recorded at 60%.",
+    "Average processing time recorded as 20 minutes."
+  ],
+  "missing_data": [],
+  "service_owner_questions": [],
+  "recommendation": "Proceed to policy assessment once core service profile fields are confirmed.",
+  "next_stage": "policy",
+  "can_continue": true,
+  "blocks_final_approval": false
+}
