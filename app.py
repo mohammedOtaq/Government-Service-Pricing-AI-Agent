@@ -250,8 +250,11 @@ def main() -> None:
                 st.success("Full journey completed.")
             st.rerun()
 
-    upload_state()
-    upload_evidence()
+    state_col, evidence_col = st.columns(2)
+    with state_col:
+        upload_state()
+    with evidence_col:
+        upload_evidence()
 
     if not st.session_state.service_data:
         st.info("Load the sample service or enter service data to begin.")
