@@ -1,0 +1,83 @@
+{
+  "agent_name": "Scenario Agent",
+  "stage": "scenarios",
+  "status": "completed",
+  "service_id": "SRV-001",
+  "inputs_used": {
+    "costing": {
+      "direct_cost": 2800000.0,
+      "indirect_cost": 1400000.0,
+      "annual_transactions": 12000.0,
+      "current_fee": 500.0,
+      "proposed_fee": 450.0,
+      "third_party_fee": 20.0,
+      "other_mandatory_charges": 10.0,
+      "total_cost": 4200000.0,
+      "unit_cost": 350.0,
+      "current_annual_revenue": 6000000.0,
+      "proposed_annual_revenue": 5400000.0,
+      "revenue_difference": -600000.0,
+      "cost_recovery_ratio": 1.2857142857142858,
+      "customer_fee_change": -50.0,
+      "customer_fee_change_percentage": -0.1,
+      "total_customer_cost": 480.0
+    },
+    "benchmark_status": "completed",
+    "reference_benchmark_fee": 430
+  },
+  "analysis": {
+    "scenarios": [
+      {
+        "scenario_name": "Conservative scenario",
+        "proposed_fee": 430.0,
+        "estimated_revenue": 5160000.0,
+        "customer_impact": "Minimizes fee shock and keeps the proposed fee below or close to current fee.",
+        "government_impact": "Maintains revenue while protecting cost recovery where possible.",
+        "risk_level": "Low",
+        "rationale": "Avoid sharp fee increase and protect customer acceptance.",
+        "assumptions": [
+          "No major service redesign.",
+          "Transaction volumes remain stable.",
+          "Fee remains at or above calculated unit cost."
+        ]
+      },
+      {
+        "scenario_name": "Balanced scenario",
+        "proposed_fee": 450.0,
+        "estimated_revenue": 5400000.0,
+        "customer_impact": "Balances affordability, cost recovery, and benchmark position.",
+        "government_impact": "Uses the proposed fee as the core policy option.",
+        "risk_level": "Medium",
+        "rationale": "Balances cost recovery, competitiveness, and customer impact.",
+        "assumptions": [
+          "Benchmark evidence is validated.",
+          "Policy authority remains confirmed.",
+          "Fee remains close to the benchmark reference where possible."
+        ]
+      },
+      {
+        "scenario_name": "Transformational scenario",
+        "proposed_fee": 382.5,
+        "estimated_revenue": 4590000.0,
+        "customer_impact": "Assumes automation or redesign can lower customer cost over time.",
+        "government_impact": "May reduce revenue but supports digital transformation and customer experience.",
+        "risk_level": "Medium",
+        "rationale": "Uses automation, bundling, or service redesign to reduce processing burden.",
+        "assumptions": [
+          "Automation reduces processing cost.",
+          "Service owner can implement journey improvements.",
+          "Digital efficiency allows future fee review without dropping below current unit cost."
+        ]
+      }
+    ]
+  },
+  "findings": [
+    "Three what-if scenarios generated from available costing evidence."
+  ],
+  "missing_data": [],
+  "service_owner_questions": [],
+  "recommendation": "Use the balanced scenario as the base case, with conditions linked to benchmark validation.",
+  "next_stage": "risk_impact",
+  "can_continue": true,
+  "blocks_final_approval": false
+}

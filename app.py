@@ -1,16 +1,20 @@
 from __future__ import annotations
 
 import json
+from io import BytesIO
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 import streamlit as st
 from dotenv import load_dotenv
+from docx import Document
 
 from agents.orchestrator import JourneyOrchestrator
 from models.journey_state import STAGE_LABELS, STAGE_ORDER, next_stage_for, progress_from_outputs
 from reports.report_generator import generate_final_markdown, generate_stage_markdown, save_report_and_state
+from reports.pdf_report import build_pricing_pdf
+from utils.pdf_evidence import REQUIRED, extract_pdf
 from utils.validation import load_json_bytes
 
 
@@ -27,6 +31,7 @@ def init_state() -> None:
 
 def load_sample_service() -> None:
     st.session_state.service_data = json.loads(SAMPLE_PATH.read_text(encoding="utf-8"))
+    st.session_state.service_json_editor = json.dumps(st.session_state.service_data, indent=2)
     st.session_state.agent_outputs = {}
     st.session_state.last_resume_stage = "service_profile"
 
@@ -52,13 +57,21 @@ def output_downloads(stage: str, output: dict[str, Any]) -> None:
         mime="application/json",
         key=f"download-json-{stage}",
     )
+    if stage == "final":
+        st.download_button(
+            "Download Final PDF Report",
+            data=build_pricing_pdf(report_text),
+            file_name="final_pricing_report.pdf",
+            mime="application/pdf",
+        )
 
 
 def service_editor() -> None:
     st.subheader("Service Data")
+    st.session_state.setdefault("service_json_editor", json.dumps(st.session_state.service_data, indent=2))
     raw = st.text_area(
         "Edit service JSON",
-        value=json.dumps(st.session_state.service_data, indent=2),
+        key="service_json_editor",
         height=360,
         help="Use local prototype data only. Do not paste confidential data.",
     )
@@ -69,9 +82,79 @@ def service_editor() -> None:
                 st.error("Service JSON must be an object.")
                 return
             st.session_state.service_data = data
+            st.session_state.agent_outputs = {}
             st.success("Service data updated.")
         except json.JSONDecodeError as exc:
             st.error(f"Invalid JSON: {exc}")
+
+
+def review_pdf_evidence(name: str, content: bytes, index: int) -> None:
+    pages, fields, sources, issues = extract_pdf(content)
+    if not any(text or tables for _, text, tables in pages):
+        st.warning("No readable text or tables found. For scanned pages, upload a searchable copy.")
+        return
+    current = st.session_state.service_data
+    if fields:
+        st.json({key: {"value": value, "page": sources[key]} for key, value in fields.items()})
+    conflicts = sorted(key for key, value in fields.items() if current.get(key) not in (None, "", value))
+    if conflicts:
+        st.warning("Existing values differ for " + ", ".join(conflicts))
+    missing = sorted(key for key in REQUIRED if fields.get(key, current.get(key)) in (None, ""))
+    if missing:
+        st.warning("Missing pricing inputs: " + ", ".join(missing))
+    for issue in dict.fromkeys(issues):
+        st.warning(issue)
+    if fields and st.button("Apply PDF inputs", key=f"apply-evidence-{index}"):
+        if current.get("service_id") and fields.get("service_id", current["service_id"]) != current["service_id"]:
+            st.error("The PDF service ID differs from the active service. Clear the service data before importing.")
+        else:
+            updated = {**current, **fields}
+            st.session_state.service_data = updated
+            st.session_state.service_json_editor = json.dumps(updated, indent=2)
+            st.session_state.agent_outputs = {}
+            st.session_state.last_resume_stage = "service_profile"
+            st.success(f"Applied inputs from {name}. Run the pricing journey to refresh the analysis.")
+    for page_number, text, tables in pages:
+        st.write(f"Page {page_number}")
+        st.text(text)
+        for table in tables:
+            st.dataframe(table)
+
+
+def preview_evidence(name: str, content: bytes, index: int) -> None:
+    extension = Path(name).suffix.lower()
+    if extension == ".pdf":
+        review_pdf_evidence(name, content, index)
+    elif extension == ".docx":
+        document = Document(BytesIO(content))
+        st.text("\n".join(paragraph.text for paragraph in document.paragraphs))
+        for table in document.tables:
+            st.dataframe([[cell.text for cell in row.cells] for row in table.rows])
+    elif extension == ".xlsx":
+        with pd.ExcelFile(BytesIO(content), engine="openpyxl") as workbook:
+            sheet = st.selectbox("Worksheet", workbook.sheet_names, key=f"evidence-sheet-{index}")
+            st.dataframe(workbook.parse(sheet, nrows=100))
+    elif extension == ".csv":
+        st.dataframe(pd.read_csv(BytesIO(content), nrows=100))
+    else:
+        st.image(content)
+
+
+def upload_evidence() -> None:
+    st.subheader("Upload Supporting Documents")
+    uploaded = st.file_uploader(
+        "Upload government service evidence",
+        type=["pdf", "docx", "xlsx", "csv", "png", "jpg", "jpeg"],
+        accept_multiple_files=True,
+    )
+    if uploaded:
+        st.caption("Review and apply extracted PDF inputs, or enter verified details in Service Data.")
+    for index, file in enumerate(uploaded):
+        with st.expander(f"{index + 1}. {file.name}"):
+            try:
+                preview_evidence(file.name, file.getvalue(), index)
+            except Exception as exc:
+                st.error(f"Could not preview this file. {exc}")
 
 
 def upload_state() -> None:
@@ -168,6 +251,7 @@ def main() -> None:
             st.rerun()
 
     upload_state()
+    upload_evidence()
 
     if not st.session_state.service_data:
         st.info("Load the sample service or enter service data to begin.")

@@ -3,3 +3,7 @@ pandas
 pydantic
 python-dotenv
 pytest
+pdfplumber
+reportlab
+python-docx
+openpyxl

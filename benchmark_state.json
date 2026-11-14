@@ -1,0 +1,113 @@
+{
+  "agent_name": "Benchmark Agent",
+  "stage": "benchmark",
+  "status": "completed",
+  "service_id": "SRV-001",
+  "inputs_used": {
+    "current_fee": 500,
+    "proposed_fee": 450,
+    "benchmark_fee": 430,
+    "benchmark_comparators": [
+      {
+        "jurisdiction_or_country": "GCC Comparator 1",
+        "region": "gcc",
+        "comparable_service_name": "Professional Permit Renewal",
+        "fee_amount": 430,
+        "currency": "AED equivalent",
+        "renewal_period_months": 12,
+        "third_party_charges": 15,
+        "other_mandatory_charges": 5,
+        "processing_time_days": 2,
+        "number_of_steps": 4,
+        "source_or_evidence": "Sample evidence for prototype only"
+      },
+      {
+        "jurisdiction_or_country": "GCC Comparator 2",
+        "region": "gcc",
+        "comparable_service_name": "Activity Permit Renewal",
+        "fee_amount": 460,
+        "currency": "AED equivalent",
+        "renewal_period_months": 12,
+        "third_party_charges": 20,
+        "other_mandatory_charges": 10,
+        "processing_time_days": 3,
+        "number_of_steps": 5,
+        "source_or_evidence": "Sample evidence for prototype only"
+      },
+      {
+        "jurisdiction_or_country": "International Comparator 1",
+        "region": "international",
+        "comparable_service_name": "Business Activity Renewal",
+        "fee_amount": 400,
+        "currency": "AED equivalent",
+        "renewal_period_months": 12,
+        "third_party_charges": 0,
+        "other_mandatory_charges": 0,
+        "processing_time_days": 1,
+        "number_of_steps": 3,
+        "source_or_evidence": "Sample evidence for prototype only"
+      }
+    ]
+  },
+  "analysis": {
+    "benchmark_status": "completed",
+    "comparator_count": 3,
+    "gcc_or_regional_comparator_count": 2,
+    "international_comparator_count": 1,
+    "average_benchmark_fee": 430.0,
+    "reference_benchmark_fee": 430,
+    "classification": "slightly_above_benchmark",
+    "competitiveness_risk": true,
+    "comparator_summary": [
+      {
+        "jurisdiction_or_country": "GCC Comparator 1",
+        "region": "gcc",
+        "comparable_service_name": "Professional Permit Renewal",
+        "fee_amount": 430,
+        "currency": "AED equivalent",
+        "renewal_period_months": 12,
+        "third_party_charges": 15,
+        "other_mandatory_charges": 5,
+        "processing_time_days": 2,
+        "number_of_steps": 4,
+        "source_or_evidence": "Sample evidence for prototype only"
+      },
+      {
+        "jurisdiction_or_country": "GCC Comparator 2",
+        "region": "gcc",
+        "comparable_service_name": "Activity Permit Renewal",
+        "fee_amount": 460,
+        "currency": "AED equivalent",
+        "renewal_period_months": 12,
+        "third_party_charges": 20,
+        "other_mandatory_charges": 10,
+        "processing_time_days": 3,
+        "number_of_steps": 5,
+        "source_or_evidence": "Sample evidence for prototype only"
+      },
+      {
+        "jurisdiction_or_country": "International Comparator 1",
+        "region": "international",
+        "comparable_service_name": "Business Activity Renewal",
+        "fee_amount": 400,
+        "currency": "AED equivalent",
+        "renewal_period_months": 12,
+        "third_party_charges": 0,
+        "other_mandatory_charges": 0,
+        "processing_time_days": 1,
+        "number_of_steps": 3,
+        "source_or_evidence": "Sample evidence for prototype only"
+      }
+    ]
+  },
+  "findings": [
+    "Average benchmark fee from available evidence is 430.00.",
+    "Proposed fee is above available benchmark evidence, creating competitiveness risk."
+  ],
+  "missing_data": [],
+  "service_owner_questions": [],
+  "recommendation": "Benchmark evidence supports continuation with documented assumptions.",
+  "next_stage": "scenarios",
+  "can_continue": true,
+  "blocks_final_approval": false
+}

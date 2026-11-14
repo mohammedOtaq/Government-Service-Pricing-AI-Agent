@@ -1,0 +1,129 @@
+{
+  "agent_name": "Risk and Impact Agent",
+  "stage": "risk_impact",
+  "status": "completed_with_gaps",
+  "service_id": "SRV-001",
+  "inputs_used": {
+    "benchmark": {
+      "benchmark_status": "completed",
+      "comparator_count": 3,
+      "gcc_or_regional_comparator_count": 2,
+      "international_comparator_count": 1,
+      "average_benchmark_fee": 430.0,
+      "reference_benchmark_fee": 430,
+      "classification": "slightly_above_benchmark",
+      "competitiveness_risk": true,
+      "comparator_summary": [
+        {
+          "jurisdiction_or_country": "GCC Comparator 1",
+          "region": "gcc",
+          "comparable_service_name": "Professional Permit Renewal",
+          "fee_amount": 430,
+          "currency": "AED equivalent",
+          "renewal_period_months": 12,
+          "third_party_charges": 15,
+          "other_mandatory_charges": 5,
+          "processing_time_days": 2,
+          "number_of_steps": 4,
+          "source_or_evidence": "Sample evidence for prototype only"
+        },
+        {
+          "jurisdiction_or_country": "GCC Comparator 2",
+          "region": "gcc",
+          "comparable_service_name": "Activity Permit Renewal",
+          "fee_amount": 460,
+          "currency": "AED equivalent",
+          "renewal_period_months": 12,
+          "third_party_charges": 20,
+          "other_mandatory_charges": 10,
+          "processing_time_days": 3,
+          "number_of_steps": 5,
+          "source_or_evidence": "Sample evidence for prototype only"
+        },
+        {
+          "jurisdiction_or_country": "International Comparator 1",
+          "region": "international",
+          "comparable_service_name": "Business Activity Renewal",
+          "fee_amount": 400,
+          "currency": "AED equivalent",
+          "renewal_period_months": 12,
+          "third_party_charges": 0,
+          "other_mandatory_charges": 0,
+          "processing_time_days": 1,
+          "number_of_steps": 3,
+          "source_or_evidence": "Sample evidence for prototype only"
+        }
+      ]
+    },
+    "costing": {
+      "direct_cost": 2800000.0,
+      "indirect_cost": 1400000.0,
+      "annual_transactions": 12000.0,
+      "current_fee": 500.0,
+      "proposed_fee": 450.0,
+      "third_party_fee": 20.0,
+      "other_mandatory_charges": 10.0,
+      "total_cost": 4200000.0,
+      "unit_cost": 350.0,
+      "current_annual_revenue": 6000000.0,
+      "proposed_annual_revenue": 5400000.0,
+      "revenue_difference": -600000.0,
+      "cost_recovery_ratio": 1.2857142857142858,
+      "customer_fee_change": -50.0,
+      "customer_fee_change_percentage": -0.1,
+      "total_customer_cost": 480.0
+    }
+  },
+  "analysis": {
+    "risks": [
+      {
+        "risk": "competitiveness risk",
+        "level": "Medium",
+        "mitigation": "Validate benchmark evidence and consider conditional fee review."
+      },
+      {
+        "risk": "duplication risk",
+        "level": "Medium",
+        "mitigation": "Review overlap with other mandatory charges or permits."
+      },
+      {
+        "risk": "customer perception risk",
+        "level": "Low",
+        "mitigation": "Communicate that the proposed fee is lower than the current fee."
+      },
+      {
+        "risk": "compliance risk",
+        "level": "Low",
+        "mitigation": "Keep legal or policy authority evidence with the business case."
+      },
+      {
+        "risk": "operational risk",
+        "level": "Medium",
+        "mitigation": "Confirm implementation readiness and system changes."
+      },
+      {
+        "risk": "data quality risk",
+        "level": "Medium",
+        "mitigation": "Validate prototype sample evidence before real approval."
+      }
+    ],
+    "economic_impact": "Not provided",
+    "social_impact": "Not provided",
+    "environmental_impact": "Not provided"
+  },
+  "findings": [
+    "Key risks and impacts have been assessed using available evidence."
+  ],
+  "missing_data": [
+    "economic_impact",
+    "social_impact",
+    "environmental_impact"
+  ],
+  "service_owner_questions": [
+    "Provide economic, social, and environmental impact evidence where available."
+  ],
+  "recommendation": "Proceed with conditions focused on benchmark validation, duplication review, and data quality.",
+  "next_stage": "business_case",
+  "can_continue": true,
+  "blocks_final_approval": false
+}
